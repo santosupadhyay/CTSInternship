@@ -99,6 +99,4 @@ function outer() {
 }
 let greeting =outer();
 greeting()
-dhfgjdgf
-dfkjdfkd
-dgjkdjgd
+
