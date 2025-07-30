@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Database service
+  postgres:
+    image: postgres:15
+    container_name: fullstackdocker-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fullstackdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fullstack-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: fullstackdocker-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@fullstack.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - fullstack-network
+
+  # Backend service
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: fullstackdocker-backend
+    env_file:
+      - ./server/.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - /server/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - fullstack-network
+    command: npm run dev
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fullstackdocker-frontend
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - fullstack-network
+    command: npm run dev -- --host
+
+volumes:
+  postgres_data:
+
+networks:
+  fullstack-network:
+    driver: bridge
