@@ -1,0 +1,57 @@
+What is OAuth?
+    OAuth (Open Authorization) is a secure authorization protocol that lets one app access a user’s data from another app without needing the user’s password.
+    Example: When you click “Login with Google” on a website, it uses OAuth to get your basic info from Google without asking for your Google password.
+
+Real Life Comparison:
+    You go to a hotel and give your ID to the receptionist. Instead of giving your ID to the room cleaner, the receptionist gives the cleaner a key card (token) with limited access.
+
+Same with OAuth:
+    Your password = ID (never shared)
+    The app gets a token = key card (limited access)
+
+Why OAuth?
+    Avoid sharing passwords between apps
+    Allow third-party apps limited access to user data
+    Allow user to revoke access anytime
+
+OAuth vs OAuth 2.0
+    | Feature           | OAuth (1.0a)           | OAuth 2.0 ✅                |
+    | ----------------- | ---------------------- | -------------------------- |
+    | Introduced        | 2007                   | 2012                       |
+    | Complexity        | Complex (HMAC, crypto) | Simpler (tokens via HTTPS) |
+    | Token Type        | Signed requests        | Bearer tokens (JWT etc.)   |
+    | Mobile support    | Poor                   | Excellent                  |
+    | Industry standard | Obsolete               | Widely used                |
+
+
+How OAuth 2.0 Works (4 Steps)
+    Let’s say you want to “Login with Google” on your MERN app:
+
+    1. User Clicks “Login with Google”
+        Your frontend redirects to Google’s OAuth URL with a client_id.
+    2. Google Shows Consent Screen
+        The user chooses which info to share (name, email, etc).
+    3. Google Sends Code to Your App
+        Google redirects back to your app with an authorization code.
+    4. Your Server Exchanges Code for Token
+        Your backend sends the code + secret to Google and receives an access token (sometimes refresh token too).
+
+Workflow:
+User ----> Your App ----> Google OAuth ---> [Consent Screen]
+                                    <----- Auth Code
+Your App ----> Google (with code + secret)
+             <----- Access Token (for accessing user's email, etc.)
+
+In MERN Projects: How to Use OAuth 2.0?
+    Use Passport.js with passport-google-oauth20 in Node.js backend.
+    Or use Firebase Auth / Auth0 for a simpler setup.
+    Frontend (React): Redirect user to Google login screen.
+    Backend (Node + Express): Handle callback and get token.
+
+| Task                | Tool                                 |
+| ------------------- | ------------------------------------ |
+| OAuth 2.0 Strategy  | `passport-google-oauth20`            |
+| JWT token handling  | `jsonwebtoken`                       |
+| Firebase-based auth | Firebase Auth                        |
+| Secure storage      | `httpOnly` cookies or `localStorage` |
+ 
