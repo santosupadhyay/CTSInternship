@@ -1,0 +1,38 @@
+What is CORS?
+    CORS (Cross-Origin Resource Sharing) is a security mechanism built into browsers that restricts frontend JavaScript from making requests to a different domain (origin) than the one that served the web page — unless the server explicitly allows it.
+
+Real-Life Analogy:
+    Imagine you’re in a college, and the librarian only allows students from that college to access the library. If a student from another college comes, they need special permission — that’s what CORS is.
+
+🌐 What's an "Origin"?
+    An origin is a combination of:
+        protocol + domain + port
+        Examples:
+            http://localhost:3000 (frontend)
+            http://localhost:5000 (backend)
+            These are different origins, so a frontend app on port 3000 cannot directly fetch data from backend 5000 without CORS.
+
+What Happens Without CORS?
+// Frontend (React)
+fetch("http://localhost:5000/api/users")
+You'll get this error in the browser:
+    Access to fetch at 'http://localhost:5000/api/users' from origin 'http://localhost:3000' has been blocked by CORS policy.
+
+How to Fix CORS in a MERN App
+🛠️ In Express (Backend):
+Install the cors middleware:
+    npm install cors
+    Use it in index.js:
+        const cors = require("cors");
+        app.use(cors({
+        origin: "http://localhost:3000",  // Allow only this origin
+        credentials: true                 // Allow cookies (optional)
+        }));
+    This tells the browser:
+        “Hey, requests from http://localhost:3000 are allowed.”
+
+CORS is Not a Bug, It's a Browser Security Feature
+CORS only applies in the browser
+
+    Postman or server-to-server requests don't care about CORS
+    It protects users from malicious websites trying to hijack their sessions 

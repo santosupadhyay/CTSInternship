@@ -1,0 +1,34 @@
+# Node modules and dependencies
+node_modules
+npm-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Development files
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+README.md
+docs
+*.md
+
+# Build and test directories
+coverage
+dist
+build
+.nyc_output
+
+# Logs
+logs
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
