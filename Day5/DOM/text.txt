@@ -1,0 +1,38 @@
+There are so many event listeners in JS while manipulating the DOM
+
+Most popular types of event listeners are as below: 
+
+Mouse Events -	click, dblclick, mousedown, mouseup, mouseenter, mouseleave, mouseover, mouseout, mousemove, contextmenu
+
+
+Keyboard Events - 	keydown, keyup, keypress (deprecated)
+
+
+Form Events - 	submit, change, focus, blur, input, reset, invalid
+
+
+Window Events - 	load, resize, scroll, unload, beforeunload, error
+
+
+Clipboard Events -   copy, cut, paste
+
+
+Touch Events -  	touchstart, touchend, touchmove, touchcancel
+
+
+Drag Events -    drag, dragstart, dragend, dragover, dragenter, dragleave, drop
+
+
+Media Events -  	play, pause, ended, volumechange, timeupdate, loadeddata
+
+
+Focus Events -  	focus, blur, focusin, focusout
+
+
+Animation Events -  	animationstart, animationend, animationiteration
+
+
+Transition Events - 	transitionstart, transitionend, transitionrun
+
+
+Pointer Events - 	pointerdown, pointerup, pointermove, pointerenter, pointerleave
