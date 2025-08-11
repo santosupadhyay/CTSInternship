@@ -99,3 +99,4 @@ function outer() {
 }
 let greeting =outer();
 greeting()
+

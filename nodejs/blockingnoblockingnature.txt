@@ -1,0 +1,6 @@
+| Type             | Meaning                      | Example                       |
+| ---------------- | ---------------------------- | ----------------------------- |
+| Blocking         | Waits until task is complete | Reading a file synchronously  |
+| Non-blocking     | Continues without waiting    | Reading a file asynchronously |
+
+
