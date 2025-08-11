@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      gap: 20px;
+    "
+  >
+    <h1 id="heading" style="width: 100%; padding: 10px"></h1>
+    <div
+      class="shape"
+      style="
+        height: 300px;
+        width: 300px;
+        border: 2px solid black;
+        border-radius: 50%;
+      "
+    ></div>
+    <button
+      style="width: 100px; padding: 10px; font-size: 24px; border-radius: 20px"
+    >
+      ON
+    </button>
+
+    <div
+      id="myModal"
+      style="
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      "
+    >
+      <div
+        style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          width: 300px;
+          text-align: center;
+          position: relative;
+        "
+      >
+        <span
+          id="closeModal"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            cursor: pointer;
+          "
+          >&times;</span
+        >
+        <h2>Hello!</h2>
+        <p>This modal appears when the page finishes loading.</p>
+      </div>
+    </div>
+  </body>
+  <script defer src="index.js"></script>
+</html>
