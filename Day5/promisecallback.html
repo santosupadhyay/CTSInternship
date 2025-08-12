@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+    <h1>Promises</h1>
+</body>
+<script>
+
+    //Promise- It is an object that returns a value which you hope to receive in the future, but not now
+    let data = new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            reject('Error found')
+        },2000)
+    })
+    data.then( (item) => {
+        console.log(item)
+    }).catch( (error) => {
+        console.log('Some error occured', error)
+    }).finally( () => {
+        console.log('Finally executes either it is resolved or rejected.')
+    })
+
+    //Callback
+    function add(a,b, callback){
+        let result = a+b;
+        callback(result)
+    }
+    function showResult (result){
+        console.log(result)
+    }
+    add(4,6, showResult)
+    
+
+    //Built in objects
+    console.log(Math.PI)
+    console.log(Math.max(10,20,12,90,1001));
+    console.log(Math.min(10,20,12,90,1001));
+    console.log(Math.round(1.4))
+    console.log(Math.floor(1.5))
+    console.log(Math.abs(-5)) //gives absolute value i.e. 5
+    console.log(Math.random())
+    console.log(Math.sqrt(16))
+    console.log(Math.pow(2,2))
+
+    let current = new Date()
+    console.log(current)
+
+    let getDay = new Date().getDay().toString()
+    console.log(getDay)
+
+    let getYear = new Date().getFullYear()
+    console.log(getYear)
+
+    let month = new Date().getMonth()
+    console.log(month)
+
+    // and many more 
+    
+</script>
+</html>

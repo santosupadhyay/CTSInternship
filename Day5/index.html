@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day5</title>
+</head>
+<body>
+    <h1>Let, Var and Const</h1>
+    
+</body>
+<script>
+    var x = 10;
+    if(true){
+        var x = 20;
+        console.log(x)
+    }
+    console.log(x)
+    //The value for both of console will be 20, as var is not block scoped, it updates its values
+    let a = 10;
+    if(true){
+        let a= 20;
+        console.log(x)
+    }
+    console.log(a)
+    //The outputof block level x is 20 and the value of outer console will be 20 
+
+    //Hoisting
+    console.log(p)
+    var p;
+    //Hoisting will only work on var not in let and const
+    //Let will give - Uncaught ReferenceError: Cannot access 'variablename'before initialization
+
+    // for (var i = 0; i<10; i++){
+    //     setTimeout(() => {
+    //         console.log(i)
+    //     }, 1000)
+    // }
+    //This code will give 10 times 10 whereas using let will give 0-9 after 1 second
+
+    //Default parameters
+    const add = (a, b=100) => {
+        return a+b;
+    }
+    console.log(add(100))
+
+    //We can send anyvalue we want
+    const someValue = () => {return 'last'}
+    const concat = (a, b = 'middle', c = 'last') => {
+        return a + b + c;
+    }
+    console.log(concat('first'))
+    //It will give firstmiddlelast as its final output
+
+    // const mainFunction = ( a, b = mainFunction() ) =>{
+    //     return a + b;
+    // }
+    // mainFunction()
+    //It will give Uncaught RangeError:Maximum call stack size exceeded
+
+    //Template literals
+    let greet = 'Hello Guys'
+    let myName =  'Santosh'
+    let myIntro = `${greet}, I'm ${myName}`
+
+    console.log(myIntro)
+    //This will give me 'Hello guys, I'm Santosh' as output
+
+    //Find
+    let data = [1,2,3,4,5]
+    let result = data.find( (item) => {
+        return item<4
+    })
+    console.log(result)
+    //Gives the first element of array that is less than 4
+
+    //Array of objects
+    let datas = [
+        {id:10, person : 'Santosh'},
+        {id:24, person : 'Roshan'},
+        {id:51, person : 'Khem'},
+        {id:7, person : 'Sameer'},
+    ]
+    let results = datas.find( (item) => {
+        return item.person
+    })
+    console.log(results)
+
+
+    //Arrow function with this
+    let item = {
+        hisName : 'Sameer',
+        getName : () => {
+            console.log(this)
+        }
+    }
+    item.getName()
+    //this in arrow function binds itself with the parent component. We don't need to bind explicitly
+
+</script>
+</html>

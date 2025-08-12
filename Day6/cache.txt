@@ -1,0 +1,60 @@
+Caching : 
+    Caching means temporarily storing data so that it can be quickly accessed later without fetching or recomputing it again.
+
+    How Does Caching Work?
+    In General:
+        When data is fetched or computed, it’s stored (cached).
+        Next time, if the same data is needed:
+            The system first checks the cache.
+            If data is found (called a cache hit), it is returned quickly.
+            If not (called a cache miss), the data is fetched from the source and stored in cache for next time.
+
+    Caching in Frontend : 
+        Browser Cache (HTTP cache) -	CSS, JS, images, fonts
+        LocalStorage / SessionStorage - 	Tokens, small user settings
+        In-Memory (state) - 	Temporary API response (e.g., React state)
+        Service Workers - 	Offline caching for Progressive Web Apps
+        React Query / SWR - 	Data-fetching libraries with caching built-in
+
+        // Using localStorage
+        const token = localStorage.getItem("auth_token"); // Read from cache
+
+    Why Backend Caching?
+        Reduces database load
+        Speeds up API response
+        Saves computation time
+        Helps scale the system
+        
+        Backend Cashing example : 
+            // Using Redis to cache data in Node.js
+            redis.get("users", (err, data) => {
+            if (data) {
+                return res.send(JSON.parse(data)); // Cache hit
+            } else {
+                const users = getUsersFromDB(); // Cache miss
+                redis.set("users", JSON.stringify(users));
+                return res.send(users);
+            }
+            });
+
+
+    | Layer    | Tool / Technique | Purpose                        |
+    | -------- | ---------------- | ------------------------------ |
+    | React    | React Query, SWR | Cache API responses            |
+    | Frontend | localStorage     | Cache tokens, preferences      |
+    | Frontend | Service Worker   | Offline cache                  |
+    | Node.js  | node-cache       | Temporary in-memory cache      |
+    | Backend  | Redis            | Fast, shared, persistent cache |
+    | Backend  | HTTP Headers     | Tell browser to cache response |
+    //Taken from AI
+
+    What Should I Learn as an Intern?
+    Frontend:
+        localStorage / sessionStorage
+        React Query or SWR
+    Backend:
+        node-cache or memory-cache
+        Redis basics (install, set, get)
+        How to cache DB queries
+        Set Cache-Control headers
+ 

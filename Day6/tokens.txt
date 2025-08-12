@@ -1,0 +1,22 @@
+Access Token vs Refresh Token (Simple)
+    Access Token
+        A short-lived token (e.g., 15 minutes to 1 hour).
+        Sent with every API request to prove the user is logged in.
+        Usually stored in memory or an HttpOnly cookie.
+        If it expires, the user needs a new one to keep using protected routes.
+
+    Refresh Token
+        A long-lived token (days or weeks).
+        Used only to get a new access token without making the user log in again.
+        Stored securely in an HttpOnly cookie.
+        Sent to a special endpoint (like /refresh_token) to get a fresh access token.
+
+Why use both?
+    Access tokens keep your app secure by expiring quickly.
+    Refresh tokens improve user experience by allowing silent re-login.
+
+Basic flow:
+    User logs in → gets access token + refresh token.
+    Use access token to call APIs.
+    When access token expires, use refresh token to get a new access token.
+    If refresh token expires or is invalid, user must log in again. 
