@@ -20,7 +20,7 @@ const PORT = process.env.PORT
 
 app.use(cors({ origin : 'http://localhost:5173', credentials:true}))
 app.use(session({
-  secret: process.env.MY_SECRET,
+  secret: process.env.MY_SECRET, 
   resave: false,
   saveUninitialized: true,
   cookie: {
