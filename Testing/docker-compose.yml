@@ -1,0 +1,75 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: testing-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testingdb
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - testing-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: testing-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@testing.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - testing-network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: testing-backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - testing-network
+    command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: testing-frontend
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - testing-network
+    command: npm run dev -- --host
+
+volumes:
+  postgres_data:
+
+networks:
+  testing-network:
+    driver: bridge
