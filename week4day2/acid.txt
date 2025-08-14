@@ -1,0 +1,42 @@
+Transactions :
+    Database transactions are a group of database read and write operations that have been completed successfully according to DBMS definitions.
+
+    Types:
+    Single transactions
+        A single transaction refers to a series of one or more database operations resulting in one action, completed successfully.
+    Multiple transactions
+        consists of multiple, interdependent transactions spread across different databases and systems
+
+Understanding ACID Properties in MongoDB
+
+    1. Atomicity — All operations in a transaction complete successfully or none of them do. No partial updates!
+    2. Consistency — The database transitions from one valid state to another, preserving data integrity.
+    3. Isolation — Concurrent transactions don’t interfere with each other.
+    4. Durability — Once committed, data remains in the database even after crashes.
+
+    Example: Why ACID Matters
+        Imagine you are building a banking system where a user transfers money from Account A to Account B.
+        If the operation deducts money from Account A but fails to credit Account B, the system ends up in an inconsistent state. 
+        ACID transactions help prevent such disasters.
+
+Explanation of code in index.js file:
+
+        The transaction ensures that both updates (debit and credit) either succeed together or fail together.
+        If an error occurs (network issue, database crash), MongoDB rolls back changes automatically.
+        session.startTransaction() initializes a new transaction.
+        session.commitTransaction() finalizes the transaction.
+        session.abortTransaction() ensures data integrity if something goes wrong
+
+Real-World Scenario: Booking System with Transactions
+Let’s take an airline booking system where multiple users are trying to book the same seat. We need to ensure:
+
+    Seat availability is checked.
+    If available, the seat is booked.
+    Payment is processed atomically.
+
+
+Key Takeaways:
+    Use transactions for financial, booking, and multi-step operations requiring consistency.
+    Handle failures and retries properly.
+    Transactions work within a single database across multiple collections.
+    Use session-based transactions for atomicity and durability.
