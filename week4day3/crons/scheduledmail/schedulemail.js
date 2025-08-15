@@ -39,12 +39,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-let users = [
-    "aashwinpant25@gmail.com",
-    "dasarathayer007@gmail.com",
-    "tankawasthi4u@gmail.com",
-    "joshibishal6@gmail.com",
-];
+let users = process.env.EMAIL_LIST.split(',');
 
 const BATCH_SIZE = 2;
 
