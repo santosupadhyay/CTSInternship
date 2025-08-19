@@ -9,6 +9,8 @@ const { sign } = pkg;
 
 const jwtSecret = process.env.JWT_SECRET
 
+
+
 const registerUser = async (request, response, next) => {
 
     const { name, email, password } = request.body;
