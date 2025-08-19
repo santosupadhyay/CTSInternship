@@ -60,31 +60,31 @@ const registerUser = async (request, response, next) => {
 
 const loginUser = async (request, response, next) => {
     const { email, password } = request.body;
-    
-    if(!email || !password){
+
+    if (!email || !password) {
         return next(createHttpError(400, 'All fields are required'));
     }
 
     const user = await User.findOne({ email });
-    if(!user) {
+    if (!user) {
         return next(createHttpError(404, 'User not found'))
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if(!isMatch){
+    if (!isMatch) {
         return next(createHttpError(400, 'Username or password incorrect!'))
     }
 
     try {
-        const token = sign({ sub: user._id}, jwtSecret, {
-            expiresIn:'7d'
+        const token = sign({ sub: user._id }, jwtSecret, {
+            expiresIn: '7d'
         })
-        response.json({ accessToken : token})
+        response.json({ accessToken: token })
     } catch (error) {
         return next(createHttpError(500, 'Internal server error'))
     }
 }
 
 
-export { registerUser,  loginUser }
+export { registerUser, loginUser }
