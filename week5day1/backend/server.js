@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors')
 
 const {logger} = require('./utils/logger')
 
@@ -11,6 +12,13 @@ const userRoleRoutes = require('./routes/userRoleRoutes')
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 
 mongoConnection(process.env.MONGO_URI).then(() => logger.info(`mongo db connection successful!`));
 

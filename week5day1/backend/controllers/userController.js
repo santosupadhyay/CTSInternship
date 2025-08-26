@@ -129,6 +129,7 @@ const loginUser = async (request, response) => {
         user: {
           email: user.email,
           role: user.role,
+          name:user.name
         },
         accessToken: token,
       },
