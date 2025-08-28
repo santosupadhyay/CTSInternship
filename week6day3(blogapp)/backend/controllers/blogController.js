@@ -125,10 +125,48 @@ const deleteBlogById = async (request, response) => {
     }
 };
 
+const toggleLike = async(request, response) => {
+  try {
+    const { id } = request.params;
+    const { userId } = request.user;
+    
+    const blog = await Blog.findById(id);
+
+    if(!blog){
+      return response.status(404).json({
+        success:false,
+        message:'Post not found'
+      })
+    }
+
+    const index = blog.likes.indexOf(userId);
+
+    if(index == -1){
+      blog.likes.push(id) //this means adding a like
+    } else {
+      blog.likes.splice(index, 1)
+    }
+
+    await blog.save()
+
+    response.status(200).json({
+      success:true,
+      likes : blog.likes.length
+    })
+    
+  } catch (error) {
+    return response.status(500).json({
+      success:false,
+      message:error.message
+    })
+  }
+}
+
 module.exports = {
   createBlog,
   getAllBlogs,
   getBlogById,
   updateBlogById,
   deleteBlogById,
+  toggleLike
 };
