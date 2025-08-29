@@ -7,9 +7,11 @@ require("dotenv").config();
 
 const port = process.env.PORT;
 const { mongodbConnection } = require("./config/connection");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser())
 
 app.use(cors({
   origin: "http://localhost:5173",

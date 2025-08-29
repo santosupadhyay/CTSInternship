@@ -24,16 +24,16 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
-        </Route>
 
-        <Route
-          path="admin"
-          element={
-            <ProtectedRoute role="admin">
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="admin">
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
 
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />

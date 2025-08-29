@@ -35,7 +35,7 @@ export default function Header() {
       </Link>
 
       {userRole === "admin" && (
-        <Link to="/dashboard" className="hover:text-indigo-600">
+        <Link to="/admin" className="hover:text-indigo-600">
           Dashboard
         </Link>
       )}

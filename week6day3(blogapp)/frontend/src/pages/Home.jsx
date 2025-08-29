@@ -4,9 +4,11 @@ import { fetchBlogs } from "../redux/slices/blogSlice";
 import { MessageCircle, Heart } from "lucide-react";
 import { useBlog } from "../hooks/useBlog";
 import axios from "axios";
+import { refreshAccessToken } from "../redux/slices/authSlice";
 
 export default function Homepage() {
   const API_URL = `http://localhost:3000/api/blogs`;
+
 
   const token = localStorage.getItem('token')
 
@@ -17,7 +19,6 @@ export default function Homepage() {
 
   const handleToggleLike = async (blogId) => {
     try {
-      console.log(blogId)
       await axios.put(
         `${API_URL}/like/${blogId}`,
         {},
@@ -28,7 +29,17 @@ export default function Homepage() {
       
       dispatch({ type: "TOGGLE_LIKE", payload: { blogId } });
     } catch (error) {
+      if (error.response?.data?.message === "jwt expired") {
+      const newToken = await reduxDispatch(refreshAccessToken()).unwrap();
+      await axios.put(
+        `${API_URL}/blogs/like/${blogId}`,
+        {},
+        { headers: { Authorization: `Bearer ${newToken}` } }
+      );
+      dispatch({ type: "TOGGLE_LIKE", payload: { blogId } });
+    } else {
       console.error(error);
+    }
     }
   };
 
