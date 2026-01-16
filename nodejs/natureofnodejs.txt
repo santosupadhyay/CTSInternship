@@ -1,0 +1,19 @@
+Nodejs 
+    - Node.js is a runtime environment that allows JavaScript to run outside the browser, mainly used for building fast and scalable backend/server-side applications.
+
+Features of Nodejs
+    Built on Chrome’s V8 engine
+    Uses Event-driven, Non-blocking I/O
+    Executes code asynchronously
+    Great for real-time applications
+
+Real-life Analogy:
+Imagine a waiter in a restaurant (Node.js server):
+
+    Takes orders (requests)
+    Doesn't wait at the kitchen (doesn’t block)
+    Takes the next order immediately
+    Delivers food when it's ready (callback)
+
+This is how Node.js handles multiple client requests efficiently without getting stuck.
+
