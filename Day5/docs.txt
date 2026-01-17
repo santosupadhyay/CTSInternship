@@ -1,0 +1,78 @@
+RESTful API Design
+
+    REST (Representational State Transfer) is a way to build web APIs using standard HTTP methods.
+
+    Core Principles:
+    Stateless: Server doesn’t store client state. Every request is independent.
+
+    Resources: Everything (like users, posts, products) is a resource.
+
+HTTP Methods:
+
+    Method	Purpose	Example
+    GET	Read data	GET /users
+    POST	Create data	POST /users
+    PUT	Update entire	PUT /users/1
+    PATCH	Update partial	PATCH /users/1
+    DELETE	Delete data	DELETE /users/1
+
+    Example: CRUD for users
+        Create: POST /users
+
+        Read all: GET /users
+
+        Read one: GET /users/:id
+
+        Update: PUT /users/:id
+
+        Delete: DELETE /users/:id
+
+    URL Design (Best Practices)
+        Use nouns, not verbs:
+
+        /users (good)
+
+        /getUsers, /createUser (bad)
+
+        Use plural form for collections:
+
+        /books, /students
+
+        Nest resources logically:
+
+        /users/1/posts → Posts of user with ID 1
+
+        Use query params for filters/sorting:
+
+        /products?category=shoes&sort=price
+
+        Avoid deep nesting beyond 2 levels:
+
+        /users/1/posts/5/comments/3 (too deep)
+
+Error Handling & HTTP Status Codes
+Return meaningful status codes and messages in your API responses.
+
+    Common HTTP Status Codes:
+        Code	Meaning	Use Case
+        200	OK	Successful GET/PUT/PATCH/DELETE
+        201	Created	Successful POST
+        204	No Content	Success, no response body
+        400	Bad Request	Invalid input by client
+        401	Unauthorized	Missing or invalid token
+        403	Forbidden	Authenticated but no permission
+        404	Not Found	Resource not found
+        409	Conflict	Duplicate or conflicting data
+        500	Internal Server Error	Server crashed or failed
+
+Example Response:
+{
+  "success": false,
+  "message": "User not found"
+}
+Bonus Tips:
+Always return meaningful messages in responses.
+
+Use consistent response formats (e.g., { success, message, data }).
+
+Secure sensitive routes with authentication and authorization.

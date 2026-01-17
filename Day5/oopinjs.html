@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes</title>
+  </head>
+  <body>
+    <h1>Classes in JS</h1>
+  </body>
+  <script>
+    class Person {
+      //we use this so that we can access its properties inside that particular class
+      isMyName = "Santosh";
+      constructor() {
+        console.log("constructor", this.isMyName);
+      }
+      getName() {
+        return this.isMyName;
+      }
+    }
+    let per = new Person();
+    console.log(per.getName());
+    //constructor gets called whenever we make instance of our class but for calling function like getName we have to use the instance and one more thing, we don't need to specify either it is a variable or a function, it will decide itself
+
+    //Inheritance
+    class Category {
+      dryFruits() {
+        return "Almond is a dry fruit";
+      }
+      pomeFruits() {
+        return "Apple is a pomefruit";
+      }
+    }
+    class Fruits extends Category {
+      constructor() {
+        super();
+        console.log("constructor");
+      }
+      getFruits() {
+        return "You got orange";
+      }
+    }
+    let fr = new Fruits();
+    console.log(fr.dryFruits(), fr.dryFruits());
+    //super helps in inheriting the properties of parent class
+
+    //Lexical scope of this
+    let someData = {
+      list: "friend",
+      names: ["santos", "rossy", "sammy", "khemu"],
+
+      getNamesOfFriends: function () {
+        this.names.map((item) => {
+          //the arrow function uses the this property of parent component no need to bind with the parent componenet
+          console.log(this.list, item);
+        });
+      },
+    };
+    someData.getNamesOfFriends();
+
+    //Rest operator
+    const handleFruits = (first, ...rest) => {
+      console.log("fruits:", first, rest);
+    };
+    handleFruits("apple", "banana", "mango", "pineapple");
+    //rest operator returns the result as an array
+
+
+    //In built objects in JS
+    console.log("Hello".toUpperCase());
+    console.log(Number("5") + 2);
+    console.log(Object.keys({ a: 1 }));
+
+    //Prototype
+    function User(name) {
+      this.name = name;
+    }
+
+    User.prototype.sayHello = function () {
+      console.log("Hello," + this.name);
+    };
+    const user1 = new User("Santosh");
+    user1.sayHello();
+  </script>
+</html>
